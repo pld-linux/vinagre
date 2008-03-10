@@ -1,10 +1,11 @@
 Summary:	VNC client for the GNOME desktop
+Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
 Version:	0.5.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://download.gnome.org/sources/vinagre/0.5/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/0.5/%{name}-%{version}.tar.bz2
 # Source0-md5:	3d5febbf26565e2095355848064a796a
 URL:		http://www.gnome.org/projects/vinagre/
 BuildRequires:	GConf2-devel >= 2.16.0
@@ -32,6 +33,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Vinagre is a VNC client for the GNOME desktop environment.
 
+%description -l pl.UTF-8
+Vinagre to klient VNC dla środowiska graficznego GNOME.
+
 %prep
 %setup -q
 
@@ -53,12 +57,12 @@ rm -rf $RPM_BUILD_ROOT
 
 # Remove text files installed by vinagre, we install them in a versioned
 # directory in the files section
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/vinagre/
+rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/vinagre
 
-desktop-file-install 						\
-	--remove-category=Application				\
-	--add-category=GTK					\
-	--delete-original					\
+desktop-file-install 					\
+	--remove-category=Application			\
+	--add-category=GTK				\
+	--delete-original				\
         --dir=$RPM_BUILD_ROOT%{_desktopdir}		\
         $RPM_BUILD_ROOT%{_desktopdir}/vinagre.desktop
 
@@ -89,6 +93,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*/*/*.svg
 %{_desktopdir}/*.desktop
 %{_datadir}/mime/packages/*.xml
-%{_datadir}/%{name}/
+%{_datadir}/%{name}
 %{_sysconfdir}/gconf/schemas/vinagre.schemas
 %{_mandir}/man1/*.1*
