@@ -1,11 +1,11 @@
 Summary:	VNC client for the GNOME desktop
 Name:		vinagre
-Version:	0.4
+Version:	0.5.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://download.gnome.org/sources/vinagre/0.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	97dee0faa1b78e2497b9d231053b2f6d
+Source0:	http://download.gnome.org/sources/vinagre/0.5/%{name}-%{version}.tar.bz2
+# Source0-md5:	3d5febbf26565e2095355848064a796a
 URL:		http://www.gnome.org/projects/vinagre/
 BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	autoconf >= 2.59
@@ -16,12 +16,14 @@ BuildRequires:	avahi-ui-devel >= 0.6.18
 BuildRequires:	desktop-file-utils
 BuildRequires:	gettext
 BuildRequires:	gnome-keyring-devel
+BuildRequires:	glib2-devel >= 1:2.15.5
 BuildRequires:	gtk+2-devel >= 2.11.6
 BuildRequires:	gtk-vnc-devel >= 0.3.0
 BuildRequires:	intltool
 BuildRequires:	libglade2-devel >= 2.6.0
 BuildRequires:	perl-XML-Parser
 BuildRequires:	pkgconfig
+Requires(post,preun):	GConf2
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	shared-mime-info
@@ -60,15 +62,19 @@ desktop-file-install 						\
         --dir=$RPM_BUILD_ROOT%{_desktopdir}		\
         $RPM_BUILD_ROOT%{_desktopdir}/vinagre.desktop
 
-%find_lang vinagre --with-gnome
+%find_lang vinagre --with-gnome --with-omf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
+%gconf_schema_install vinagre.schemas
 %update_desktop_database_post
 %update_mime_database
 %update_icon_cache hicolor
+
+%preun
+%gconf_schema_uninstall vinagre.schemas
 
 %postun
 %update_desktop_database_postun
@@ -84,3 +90,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/*.desktop
 %{_datadir}/mime/packages/*.xml
 %{_datadir}/%{name}/
+%{_sysconfdir}/gconf/schemas/vinagre.schemas
+%{_mandir}/man1/*.1*
