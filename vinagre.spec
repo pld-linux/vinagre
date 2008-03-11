@@ -17,7 +17,7 @@ BuildRequires:	avahi-ui-devel >= 0.6.18
 BuildRequires:	desktop-file-utils
 BuildRequires:	gettext
 BuildRequires:	gnome-keyring-devel
-BuildRequires:	glib2-devel >= 1:2.15.5
+BuildRequires:	glib2-devel >= 1:2.16.0
 BuildRequires:	gtk+2-devel >= 2.11.6
 BuildRequires:	gtk-vnc-devel >= 0.3.0
 BuildRequires:	intltool
