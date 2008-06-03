@@ -1,19 +1,19 @@
 Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
-Version:	2.23.2
+Version:	2.23.3.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/2.23/%{name}-%{version}.tar.bz2
-# Source0-md5:	8a6c29638899d7d9eafd733440838f0d
+# Source0-md5:	67e0f26d34ecb91f88e4ba4ba3a3ade5
 URL:		http://www.gnome.org/projects/vinagre/
 BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
-BuildRequires:	avahi-devel >= 0.6.18
-BuildRequires:	avahi-glib-devel >= 0.6.18
-BuildRequires:	avahi-ui-devel >= 0.6.18
+BuildRequires:	avahi-devel >= 0.6.22
+BuildRequires:	avahi-glib-devel >= 0.6.22
+BuildRequires:	avahi-ui-devel >= 0.6.22
 BuildRequires:	desktop-file-utils
 BuildRequires:	gettext
 BuildRequires:	gnome-keyring-devel
@@ -22,6 +22,7 @@ BuildRequires:	gtk+2-devel >= 2.11.6
 BuildRequires:	gtk-vnc-devel >= 0.3.6
 BuildRequires:	intltool
 BuildRequires:	libglade2-devel >= 2.6.0
+BuildRequires:	libtool
 BuildRequires:	perl-XML-Parser
 BuildRequires:	pkgconfig
 Requires(post,preun):	GConf2
@@ -41,6 +42,7 @@ Vinagre to klient VNC dla środowiska graficznego GNOME.
 
 %build
 %{__intltoolize}
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
