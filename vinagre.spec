@@ -1,34 +1,35 @@
 Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
-Version:	0.5.1
+Version:	2.24.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/0.5/%{name}-%{version}.tar.bz2
-# Source0-md5:	48e0079631952216743720fa1c59f621
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/2.24/%{name}-%{version}.tar.bz2
+# Source0-md5:	db396e9f4e008771468c34824196c8fc
 URL:		http://www.gnome.org/projects/vinagre/
 BuildRequires:	GConf2-devel >= 2.16.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
-BuildRequires:	avahi-devel >= 0.6.18
-BuildRequires:	avahi-glib-devel >= 0.6.18
-BuildRequires:	avahi-ui-devel >= 0.6.18
+BuildRequires:	avahi-devel >= 0.6.22
+BuildRequires:	avahi-glib-devel >= 0.6.22
+BuildRequires:	avahi-ui-devel >= 0.6.22
+BuildRequires:	avahi-gobject-devel >= 0.6.22
 BuildRequires:	desktop-file-utils
 BuildRequires:	gettext
 BuildRequires:	gnome-keyring-devel
 BuildRequires:	glib2-devel >= 1:2.16.0
 BuildRequires:	gtk+2-devel >= 2.11.6
-BuildRequires:	gtk-vnc-devel >= 0.3.0
+BuildRequires:	gtk-vnc-devel >= 0.3.7
 BuildRequires:	intltool
 BuildRequires:	libglade2-devel >= 2.6.0
+BuildRequires:	libtool
 BuildRequires:	perl-XML-Parser
 BuildRequires:	pkgconfig
 Requires(post,preun):	GConf2
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	shared-mime-info
-Suggests:	avahi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -98,3 +99,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}
 %{_sysconfdir}/gconf/schemas/vinagre.schemas
 %{_mandir}/man1/*.1*
+%{_libdir}/bonobo/servers/GNOME_VinagreApplet.server
+%attr(755,root,root) %{_libexecdir}/vinagre-applet
