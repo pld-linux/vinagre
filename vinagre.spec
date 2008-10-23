@@ -1,35 +1,40 @@
 Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
-Version:	2.24.0
+Version:	2.24.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/2.24/%{name}-%{version}.tar.bz2
-# Source0-md5:	db396e9f4e008771468c34824196c8fc
+# Source0-md5:	8eb630b3740793765f0d7eb4fd70894b
 URL:		http://www.gnome.org/projects/vinagre/
-BuildRequires:	GConf2-devel >= 2.16.0
+BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	avahi-devel >= 0.6.22
 BuildRequires:	avahi-glib-devel >= 0.6.22
-BuildRequires:	avahi-ui-devel >= 0.6.22
 BuildRequires:	avahi-gobject-devel >= 0.6.22
-BuildRequires:	desktop-file-utils
-BuildRequires:	gettext
-BuildRequires:	gnome-keyring-devel
-BuildRequires:	glib2-devel >= 1:2.16.0
-BuildRequires:	gtk+2-devel >= 2.11.6
+BuildRequires:	avahi-ui-devel >= 0.6.22
+BuildRequires:	gettext-devel
+BuildRequires:	glib2-devel >= 1:2.18.0
+BuildRequires:	gnome-common >= 2.24.0
+BuildRequires:	gnome-doc-utils >= 0.14.0
+BuildRequires:	gnome-keyring-devel >= 2.24.0
+BuildRequires:	gnome-panel-devel >= 2.24.0
+BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	gtk-vnc-devel >= 0.3.7
-BuildRequires:	intltool
-BuildRequires:	libglade2-devel >= 2.6.0
+BuildRequires:	intltool >= 0.40.0
+BuildRequires:	libglade2-devel >= 1:2.6.2
 BuildRequires:	libtool
 BuildRequires:	perl-XML-Parser
 BuildRequires:	pkgconfig
-Requires(post,preun):	GConf2
+BuildRequires:	rpmbuild(find_lang) >= 1.23
+BuildRequires:	rpmbuild(macros) >= 1.311
 Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	shared-mime-info
+Requires(post,preun):	GConf2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,6 +51,7 @@ Vinagre to klient VNC dla środowiska graficznego GNOME.
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	--enable-avahi=yes
@@ -61,13 +67,6 @@ rm -rf $RPM_BUILD_ROOT
 # Remove text files installed by vinagre, we install them in a versioned
 # directory in the files section
 rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/vinagre
-
-desktop-file-install 					\
-	--remove-category=Application			\
-	--add-category=GTK				\
-	--delete-original				\
-        --dir=$RPM_BUILD_ROOT%{_desktopdir}		\
-        $RPM_BUILD_ROOT%{_desktopdir}/vinagre.desktop
 
 %find_lang vinagre --with-gnome --with-omf
 
