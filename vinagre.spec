@@ -1,12 +1,14 @@
+# TODO:
+# - devel package
 Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
-Version:	2.26.2
+Version:	2.27.90
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/2.26/%{name}-%{version}.tar.bz2
-# Source0-md5:	86686bb8ba70a6cf38de48c45515c7fc
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/2.27/%{name}-%{version}.tar.bz2
+# Source0-md5:	2f4211f05632924386bad3e3c351e4a4
 URL:		http://www.gnome.org/projects/vinagre/
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf >= 2.59
@@ -22,7 +24,7 @@ BuildRequires:	gnome-doc-utils >= 0.14.0
 BuildRequires:	gnome-keyring-devel >= 2.24.0
 BuildRequires:	gnome-panel-devel >= 2.24.0
 BuildRequires:	gtk+2-devel >= 2:2.14.0
-BuildRequires:	gtk-vnc-devel >= 0.3.7
+BuildRequires:	gtk-vnc-devel >= 0.3.9
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
 BuildRequires:	libtool
@@ -94,9 +96,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/hicolor/*/*/*.svg
 %{_desktopdir}/*.desktop
+%{_datadir}/dbus-1/services/org.gnome.Empathy.StreamTubeHandler.rfb.service
 %{_datadir}/mime/packages/*.xml
 %{_datadir}/%{name}
 %{_sysconfdir}/gconf/schemas/vinagre.schemas
 %{_mandir}/man1/*.1*
 %{_libdir}/bonobo/servers/GNOME_VinagreApplet.server
+%dir %{_libdir}/vinagre-1
+%dir %{_libdir}/vinagre-1/plugin-loaders
+%{_libdir}/vinagre-1/plugin-loaders/libcloader.so
+%dir %{_libdir}/vinagre-1/plugins
+%{_libdir}/vinagre-1/plugins/libvnc.so
+%{_libdir}/vinagre-1/plugins/vnc.vinagre-plugin
 %attr(755,root,root) %{_libexecdir}/vinagre-applet
