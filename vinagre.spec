@@ -1,12 +1,12 @@
 Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
-Version:	2.91.91
+Version:	2.91.92
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	3c776450c2cb89ded68664edeaf4f0e0
+# Source0-md5:	c0ce8df741556ccc9e43e5d74a33f9ed
 URL:		http://www.gnome.org/projects/vinagre/
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.10
@@ -18,7 +18,7 @@ BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gnome-doc-utils >= 0.14.0
 # applet broken for now
-#BuildRequires:	gnome-panel-devel >= 2.91.91
+BuildRequires:	gnome-panel-devel >= 2.91.91
 BuildRequires:	gobject-introspection-devel >= 0.9.3
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	gtk3-vnc-devel >= 0.4.3
@@ -49,11 +49,19 @@ Vinagre is a VNC client for the GNOME desktop environment.
 %description -l pl.UTF-8
 Vinagre to klient VNC dla środowiska graficznego GNOME.
 
+%package -n gnome-applet-vinagre
+Summary:	Vinagre applet for gnome-panel
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+
+%description -n gnome-applet-vinagre
+Vinagre applet for gnome-panel.
+
 %package devel
 Summary:	Header files for vinagre
 Summary(pl.UTF-8):	Pliki nagłówkowe dla vinagre
 Group:		Development/Libraries
-Requires:	gtk+2-devel >= 2:2.18.0
+Requires:	gtk+3-devel >= 3.0.0
 Requires:	libxml2-devel >= 1:2.6.31
 
 %description devel
@@ -75,7 +83,7 @@ Pliki nagłówkowe dla vinagre.
 %configure \
 	--with-avahi \
 	--with-telepathy \
-	--without-panelapplet \
+	--with-panelapplet \
 	--enable-introspection \
 	--disable-spice \
 	--disable-silent-rules \
@@ -124,6 +132,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/vinagre-1/plugins/libreversevnc.so
 %{_libdir}/vinagre-1/plugins/vnc.plugin
 %{_libdir}/vinagre-1/plugins/im-status.plugin
+%{_libdir}/vinagre-1/plugins/im-status.js
 %{_libdir}/vinagre-1/plugins/reverse-vnc.plugin
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/hicolor/*/*/*.svg
@@ -135,6 +144,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/vinagre
 %{_datadir}/vinagre-1
 %{_mandir}/man1/*.1*
+
+%files -n gnome-applet-vinagre
+%defattr(644,root,root,755)
+%{_libdir}/vinagre-applet
+%{_datadir}/dbus-1/services/org.gnome.panel.applet.Vinagre.service
+%{_datadir}/gnome-panel/4.0/applets/org.gnome.panel.Vinagre.panel-applet
 
 %files devel
 %defattr(644,root,root,755)
