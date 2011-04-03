@@ -1,12 +1,12 @@
 Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
-Version:	2.91.92
+Version:	2.91.93
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	c0ce8df741556ccc9e43e5d74a33f9ed
+# Source0-md5:	432ab1e28d90cb42c34a7079c1d5b424
 URL:		http://www.gnome.org/projects/vinagre/
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.10
