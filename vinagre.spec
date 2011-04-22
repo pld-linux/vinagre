@@ -1,5 +1,5 @@
 # TODO
-# - did not find it's VNC schema when package first installed... needed to restart session
+# - did not find its VNC schema when package first installed... needed to restart X session (vinagre-2.30.3-2.x86_64)
 Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
