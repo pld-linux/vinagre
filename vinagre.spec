@@ -1,3 +1,5 @@
+# TODO
+# - did not find it's VNC schema when package first installed... needed to restart session
 Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
