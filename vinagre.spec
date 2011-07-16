@@ -1,14 +1,12 @@
-# TODO
-# - did not find its VNC schema when package first installed... needed to restart X session (vinagre-2.30.3-2.x86_64)
 Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
-Version:	3.0.0
+Version:	3.0.2
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/3.0/%{name}-%{version}.tar.bz2
-# Source0-md5:	5d1b06d21afb90c1b03b238bcfde968a
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/3.0/%{name}-%{version}.tar.xz
+# Source0-md5:	1da1f9b7cec06579d97915c30db0ff57
 URL:		http://www.gnome.org/projects/vinagre/
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
@@ -35,8 +33,10 @@ BuildRequires:	pkgconfig >= 0.16
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 #BuildRequires:	spice-slient-gtk-3.0 >= 0.5
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	telepathy-glib-devel >= 0.12.0
 BuildRequires:	vte-devel >= 0.28.0
+BuildRequires:	xz
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires(post,postun):	gtk-update-icon-cache
@@ -127,15 +127,20 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/vinagre-3.0/girepository-1.0
 %{_libdir}/vinagre-3.0/girepository-1.0/Vinagre-3.0.typelib
 %dir %{_libdir}/vinagre-3.0/plugins
+%attr(755,root,root) %{_libdir}/vinagre-3.0/plugins/librdp.so
+%attr(755,root,root) %{_libdir}/vinagre-3.0/plugins/libssh.so
 %attr(755,root,root) %{_libdir}/vinagre-3.0/plugins/libvnc.so
 %attr(755,root,root) %{_libdir}/vinagre-3.0/plugins/libreversevnc.so
 %{_libdir}/vinagre-3.0/plugins/vnc.plugin
 %{_libdir}/vinagre-3.0/plugins/im-status.plugin
 %{_libdir}/vinagre-3.0/plugins/im-status.js
 %{_libdir}/vinagre-3.0/plugins/reverse-vnc.plugin
+%{_libdir}/vinagre-3.0/plugins/rdp.plugin
+%{_libdir}/vinagre-3.0/plugins/ssh.plugin
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/hicolor/*/*/*.svg
 %{_desktopdir}/*.desktop
+%{_datadir}/GConf/gsettings/org.gnome.Vinagre.convert
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.Client.Vinagre.service
 %{_datadir}/glib-2.0/schemas/org.gnome.Vinagre.gschema.xml
 %{_datadir}/mime/packages/*.xml
