@@ -83,7 +83,6 @@ Pliki nagłówkowe dla vinagre.
 %configure \
 	--with-avahi \
 	--with-telepathy \
-	--disable-spice \
 	--disable-silent-rules \
 	--disable-scrollkeeper \
 	--disable-schemas-compile \
