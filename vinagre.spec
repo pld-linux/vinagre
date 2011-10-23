@@ -39,6 +39,8 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
 Requires:	hicolor-icon-theme
 Suggests:	gnome-icon-theme
+Obsoletes:	gnome-applet-vinagre
+Obsoletes:	vinagre-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,27 +48,6 @@ Vinagre is a VNC client for the GNOME desktop environment.
 
 %description -l pl.UTF-8
 Vinagre to klient VNC dla środowiska graficznego GNOME.
-
-%package -n gnome-applet-vinagre
-Summary:	Vinagre applet for gnome-panel
-Group:		X11/Applications
-Requires:	%{name} = %{version}-%{release}
-
-%description -n gnome-applet-vinagre
-Vinagre applet for gnome-panel.
-
-%package devel
-Summary:	Header files for vinagre
-Summary(pl.UTF-8):	Pliki nagłówkowe dla vinagre
-Group:		Development/Libraries
-Requires:	gtk+3-devel >= 3.0.3
-Requires:	libxml2-devel >= 1:2.6.31
-
-%description devel
-Header files for vinagre.
-
-%description devel -l pl.UTF-8
-Pliki nagłówkowe dla vinagre.
 
 %prep
 %setup -q
