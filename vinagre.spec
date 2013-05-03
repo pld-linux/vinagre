@@ -41,6 +41,8 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
 Requires:	hicolor-icon-theme
 Suggests:	gnome-icon-theme
+Suggests:	openssh-clients
+Suggests:	rdesktop
 Obsoletes:	gnome-applet-vinagre
 Obsoletes:	vinagre-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
