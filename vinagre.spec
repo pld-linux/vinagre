@@ -1,12 +1,12 @@
 Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
-Version:	3.8.3
+Version:	3.10.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/3.8/%{name}-%{version}.tar.xz
-# Source0-md5:	938582bb705a3ecdd285c460a36411bc
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/3.10/%{name}-%{version}.tar.xz
+# Source0-md5:	aca3d629cd7a924326930d3e2a4fcd6a
 URL:		http://www.gnome.org/projects/vinagre/
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
@@ -18,7 +18,7 @@ BuildRequires:	gettext-devel >= 0.17
 BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gnome-doc-utils >= 0.14.0
-BuildRequires:	gtk+3-devel >= 3.0.3
+BuildRequires:	gtk+3-devel >= 3.9.6
 BuildRequires:	gtk3-vnc-devel >= 0.4.3
 BuildRequires:	intltool >= 0.50.0
 BuildRequires:	itstool
