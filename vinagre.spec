@@ -6,7 +6,7 @@ Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/3.12/%{name}-%{version}.tar.xz
-# Source0-md5:	aca3d629cd7a924326930d3e2a4fcd6a
+# Source0-md5:	6c6ef3eebc1f5fd3e71f486280c526ad
 URL:		http://www.gnome.org/projects/vinagre/
 BuildRequires:	appdata-tools
 BuildRequires:	autoconf >= 2.64
