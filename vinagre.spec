@@ -9,6 +9,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/3.14/%{name}-%{version}.
 # Source0-md5:	b83d8c55a73433e1cab34436f7c42fd4
 URL:		http://www.gnome.org/projects/vinagre/
 BuildRequires:	appdata-tools
+BuildRequires:	appstream-builder-devel
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
 BuildRequires:	avahi-gobject-devel >= 0.6.26
@@ -113,3 +114,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/telepathy/clients/Vinagre.client
 %{_datadir}/vinagre
 %{_mandir}/man1/*.1*
+%{_datadir}/appdata/vinagre.appdata.xml
