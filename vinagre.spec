@@ -16,7 +16,7 @@ BuildRequires:	avahi-gobject-devel >= 0.6.26
 BuildRequires:	avahi-ui-gtk3-devel >= 0.6.26
 BuildRequires:	dbus-glib-devel
 BuildRequires:	docbook-dtd43-xml
-BuildRequires:	gettext-devel >= 0.17
+BuildRequires:	gettext-tools >= 0.17
 BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gnome-doc-utils >= 0.14.0
