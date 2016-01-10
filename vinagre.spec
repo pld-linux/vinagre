@@ -1,30 +1,35 @@
+#
+# Conditional build:
+%bcond_without	rdp	# RDP support
+%bcond_without	spice	# Spice support
+%bcond_without	ssh	# SSH support
+
 Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
-Version:	3.14.3
-Release:	2
+Version:	3.18.2
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/3.14/%{name}-%{version}.tar.xz
-# Source0-md5:	17d0831d8a049c3090e4a5ae527b44dc
-URL:		http://www.gnome.org/projects/vinagre/
-BuildRequires:	appdata-tools
-BuildRequires:	appstream-builder-devel
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/3.18/%{name}-%{version}.tar.xz
+# Source0-md5:	30093b9a262e5fbef87e992e8a6327bd
+Patch0:		%{name}-freerdp.patch
+URL:		https://wiki.gnome.org/Apps/Vinagre
+BuildRequires:	appstream-glib-devel
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11.1
 BuildRequires:	avahi-gobject-devel >= 0.6.26
 BuildRequires:	avahi-ui-gtk3-devel >= 0.6.26
 BuildRequires:	dbus-glib-devel
-BuildRequires:	docbook-dtd43-xml
+%{?with_rdp:BuildRequires:	freerdp-devel >= 1.0}
 BuildRequires:	gettext-tools >= 0.17
 BuildRequires:	glib2-devel >= 1:2.28.0
 BuildRequires:	gnome-common >= 2.24.0
-BuildRequires:	gnome-doc-utils >= 0.14.0
 BuildRequires:	gtk+3-devel >= 3.9.6
 BuildRequires:	gtk3-vnc-devel >= 0.4.3
 BuildRequires:	intltool >= 0.50.0
 BuildRequires:	itstool
-BuildRequires:	libgnome-keyring-devel >= 2.24.0
+BuildRequires:	libsecret-devel
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.6.31
 BuildRequires:	perl-XML-Parser
@@ -35,17 +40,20 @@ BuildRequires:	spice-gtk-devel >= 0.5
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	telepathy-glib-devel >= 0.12.0
 BuildRequires:	vala >= 2:0.12.0
-BuildRequires:	vte-devel >= 0.28.0
+%{?with_ssh:BuildRequires:	vte-devel >= 0.28.0}
 BuildRequires:	xz
 BuildRequires:	yelp-tools
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.26.0
+Requires(post,postun):	glib2 >= 1:2.28.0
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
+Requires:	glib2 >= 1:2.28.0
+Requires:	gtk+3 >= 3.9.6
+Requires:	gtk3-vnc >= 0.4.3
 Requires:	hicolor-icon-theme
-Suggests:	gnome-icon-theme
+Requires:	libxml2 >= 1:2.6.31
+%{?with_ssh:Requires:	vte >= 0.28.0}
 Suggests:	openssh-clients
-Suggests:	rdesktop
 Obsoletes:	gnome-applet-vinagre
 Obsoletes:	vinagre-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -58,6 +66,7 @@ Vinagre to klient VNC dla środowiska graficznego GNOME.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__intltoolize}
@@ -68,12 +77,14 @@ Vinagre to klient VNC dla środowiska graficznego GNOME.
 %{__automake}
 %configure \
 	SSH_PROGRAM=%{_bindir}/ssh \
-	RDESKTOP_PROGRAM=%{_bindir}/rdesktop \
 	--with-avahi \
 	--with-telepathy \
-	--enable-spice \
+	%{!?with_rdp:--disable-rdp} \
 	--disable-silent-rules \
-	--disable-schemas-compile
+	--disable-schemas-compile \
+	%{!?with_spice:--disable-spice} \
+	%{!?with_ssh:--disable-ssh}
+
 %{__make}
 
 %install
@@ -101,17 +112,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f vinagre.lang
 %defattr(644,root,root,755)
-%doc README NEWS COPYING AUTHORS
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/vinagre
-%{_iconsdir}/hicolor/*/*/*.png
-%{_iconsdir}/hicolor/*/*/*.svg
-%{_desktopdir}/vinagre-file.desktop
-%{_desktopdir}/vinagre.desktop
 %{_datadir}/GConf/gsettings/org.gnome.Vinagre.convert
+%{_datadir}/appdata/vinagre.appdata.xml
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.Client.Vinagre.service
 %{_datadir}/glib-2.0/schemas/org.gnome.Vinagre.gschema.xml
-%{_datadir}/mime/packages/*.xml
+%{_datadir}/mime/packages/vinagre-mime.xml
 %{_datadir}/telepathy/clients/Vinagre.client
 %{_datadir}/vinagre
-%{_mandir}/man1/*.1*
-%{_datadir}/appdata/vinagre.appdata.xml
+%{_desktopdir}/vinagre-file.desktop
+%{_desktopdir}/vinagre.desktop
+%{_iconsdir}/hicolor/*x*/mimetypes/application-x-remote-connection.png
+%{_iconsdir}/hicolor/*x*/mimetypes/application-x-vnc.png
+%{_iconsdir}/hicolor/*x*/status/view-minimize.png
+%{_iconsdir}/hicolor/scalable/mimetypes/application-x-remote-connection.svg
+%{_iconsdir}/hicolor/scalable/mimetypes/application-x-vnc.svg
+%{_mandir}/man1/vinagre.1*
