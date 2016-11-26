@@ -6,7 +6,7 @@
  #endif
 +#if HAVE_FREERDP_1_1
  #include <freerdp/version.h>
- #if (FREERDP_VERSION_MAJOR == 1 && FREERDP_VERSION_MINOR >= 2 && FREERDP_VERSION_REVISION >= 1)
+ #if (FREERDP_VERSION_MAJOR == 1 && FREERDP_VERSION_MINOR >= 2 && FREERDP_VERSION_REVISION >= 1) || (FREERDP_VERSION_MAJOR == 2)
    settings->UseRdpSecurityLayer = FALSE;
  #else
    settings->DisableEncryption = FALSE;
@@ -23,6 +23,6 @@
    /* Allow font smoothing by default */
    settings->AllowFontSmoothing = TRUE;
 +#endif
+ }
  
-   /* Setup display for FreeRDP session */
-   priv->display = gtk_drawing_area_new ();
+ static void
