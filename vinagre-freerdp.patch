@@ -26,3 +26,32 @@
  }
  
  static void
+@@ -1207,10 +1207,13 @@
+   init_freerdp (rdp_tab);
+   init_display (rdp_tab);
+ 
++#if HAVE_FREERDP_1_1
+   do
+     {
++#endif
+       /* Run FreeRDP session */
+       success = freerdp_connect (priv->freerdp_session);
++#if HAVE_FREERDP_1_1
+       if (!success)
+         {
+           authentication_errors += freerdp_get_last_error (priv->freerdp_session->context) == 0x20009 ||
+@@ -1223,11 +1226,14 @@
+         }
+     }
+   while (!success && authentication_errors < 3);
++#endif
+ 
+   if (!success)
+     {
+       gtk_window_unfullscreen (window);
++#if HAVE_FREERDP_1_1
+       if (!cancelled)
++#endif
+         vinagre_utils_show_error_dialog (_("Error connecting to host."),
+                                          NULL,
+                                          window);
