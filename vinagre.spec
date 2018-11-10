@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	rdp	# RDP support
+%bcond_with	rdp	# RDP support
 %bcond_without	spice	# Spice support
 %bcond_without	ssh	# SSH support
 
@@ -8,7 +8,7 @@ Summary:	VNC client for the GNOME desktop
 Summary(pl.UTF-8):	Klient VNC dla środowiska GNOME
 Name:		vinagre
 Version:	3.22.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/3.22/%{name}-%{version}.tar.xz
@@ -115,7 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/vinagre
 %{_datadir}/GConf/gsettings/org.gnome.Vinagre.convert
-%{_datadir}/appdata/vinagre.appdata.xml
+%{_datadir}/metainfo/vinagre.appdata.xml
 %{_datadir}/dbus-1/services/org.freedesktop.Telepathy.Client.Vinagre.service
 %{_datadir}/glib-2.0/schemas/org.gnome.Vinagre.gschema.xml
 %{_datadir}/mime/packages/vinagre-mime.xml
