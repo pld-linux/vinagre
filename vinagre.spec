@@ -11,7 +11,7 @@ Version:	3.22.0
 Release:	2
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/vinagre/3.22/%{name}-%{version}.tar.xz
+Source0:	https://download.gnome.org/sources/vinagre/3.22/%{name}-%{version}.tar.xz
 # Source0-md5:	451554ddf46636105cd5f0330e98d254
 Patch0:		%{name}-freerdp.patch
 URL:		https://wiki.gnome.org/Apps/Vinagre
@@ -23,7 +23,7 @@ BuildRequires:	avahi-ui-gtk3-devel >= 0.6.26
 BuildRequires:	dbus-glib-devel
 %{?with_rdp:BuildRequires:	freerdp-devel >= 1.0}
 BuildRequires:	gettext-tools >= 0.17
-BuildRequires:	glib2-devel >= 1:2.28.0
+BuildRequires:	glib2-devel >= 1:2.32.0
 BuildRequires:	gnome-common >= 2.24.0
 BuildRequires:	gtk+3-devel >= 3.9.6
 BuildRequires:	gtk3-vnc-devel >= 0.4.3
@@ -44,10 +44,10 @@ BuildRequires:	vala >= 2:0.12.0
 BuildRequires:	xz
 BuildRequires:	yelp-tools
 Requires(post,postun):	desktop-file-utils
-Requires(post,postun):	glib2 >= 1:2.28.0
+Requires(post,postun):	glib2 >= 1:2.32.0
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
-Requires:	glib2 >= 1:2.28.0
+Requires:	glib2 >= 1:2.32.0
 Requires:	gtk+3 >= 3.9.6
 Requires:	gtk3-vnc >= 0.4.3
 Requires:	hicolor-icon-theme
