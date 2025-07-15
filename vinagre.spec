@@ -66,7 +66,7 @@ Vinagre to klient VNC dla środowiska graficznego GNOME.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %{__intltoolize}
