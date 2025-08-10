@@ -14,6 +14,7 @@ Group:		X11/Applications
 Source0:	https://download.gnome.org/sources/vinagre/3.22/%{name}-%{version}.tar.xz
 # Source0-md5:	451554ddf46636105cd5f0330e98d254
 Patch0:		%{name}-freerdp.patch
+Patch1:		c99.patch
 URL:		https://wiki.gnome.org/Apps/Vinagre
 BuildRequires:	appstream-glib-devel
 BuildRequires:	autoconf >= 2.64
@@ -67,6 +68,7 @@ Vinagre to klient VNC dla środowiska graficznego GNOME.
 %prep
 %setup -q
 %patch -P0 -p1
+%patch -P1 -p1
 
 %build
 %{__intltoolize}
