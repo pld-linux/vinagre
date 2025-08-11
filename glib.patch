@@ -1,0 +1,82 @@
+diff -ur vinagre-3.22.0/plugins/vnc/vinagre-vnc-connection.c vinagre-3.22.0.new/plugins/vnc/vinagre-vnc-connection.c
+--- vinagre-3.22.0/plugins/vnc/vinagre-vnc-connection.c	2016-09-13 10:34:13.000000000 +0200
++++ vinagre-3.22.0.new/plugins/vnc/vinagre-vnc-connection.c	2025-08-12 00:25:20.606660855 +0200
+@@ -27,6 +27,8 @@
+ #include "vinagre-vnc-connection.h"
+ #include "vinagre-vala.h"
+ 
++gboolean scaling_command_line;
++
+ struct _VinagreVncConnectionPrivate
+ {
+   gchar    *desktop_name;
+diff -ur vinagre-3.22.0/plugins/vnc/vinagre-vnc-connection.h vinagre-3.22.0.new/plugins/vnc/vinagre-vnc-connection.h
+--- vinagre-3.22.0/plugins/vnc/vinagre-vnc-connection.h	2016-09-13 10:34:13.000000000 +0200
++++ vinagre-3.22.0.new/plugins/vnc/vinagre-vnc-connection.h	2025-08-12 00:24:52.189994192 +0200
+@@ -26,7 +26,7 @@
+ 
+ G_BEGIN_DECLS
+ 
+-gboolean scaling_command_line;
++extern gboolean scaling_command_line;
+ 
+ #define VINAGRE_TYPE_VNC_CONNECTION             (vinagre_vnc_connection_get_type ())
+ #define VINAGRE_VNC_CONNECTION(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), VINAGRE_TYPE_VNC_CONNECTION, VinagreVncConnection))
+diff -ur vinagre-3.22.0/vinagre/vinagre-dirs.c vinagre-3.22.0.new/vinagre/vinagre-dirs.c
+--- vinagre-3.22.0/vinagre/vinagre-dirs.c	2016-09-20 08:03:46.000000000 +0200
++++ vinagre-3.22.0.new/vinagre/vinagre-dirs.c	2025-08-12 00:19:51.086660881 +0200
+@@ -99,8 +99,8 @@
+ gchar* vinagre_dirs_get_package_data_file (const gchar* filename) {
+ 	gchar* result = NULL;
+ 	gchar** system_data_dirs = NULL;
+-	gchar** _tmp0_ = NULL;
+-	gchar** _tmp1_ = NULL;
++	const gchar * const* _tmp0_ = NULL;
++	const gchar * const* _tmp1_ = NULL;
+ 	gchar** _tmp2_ = NULL;
+ 	gint _tmp2__length1 = 0;
+ 	gint system_data_dirs_length1 = 0;
+@@ -119,8 +119,8 @@
+ 	const gchar* _tmp18_ = NULL;
+ 	g_return_val_if_fail (filename != NULL, NULL);
+ 	_tmp1_ = _tmp0_ = g_get_system_data_dirs ();
+-	_tmp2_ = (_tmp1_ != NULL) ? _vala_array_dup1 (_tmp1_, _vala_array_length (_tmp0_)) : ((gpointer) _tmp1_);
+-	_tmp2__length1 = _vala_array_length (_tmp0_);
++	_tmp2_ = (_tmp1_ != NULL) ? _vala_array_dup1 ((gpointer)_tmp1_, _vala_array_length ((gpointer)_tmp0_)) : ((gpointer) (gpointer)_tmp1_);
++	_tmp2__length1 = _vala_array_length ((gpointer)_tmp0_);
+ 	system_data_dirs = _tmp2_;
+ 	system_data_dirs_length1 = _tmp2__length1;
+ 	_system_data_dirs_size_ = system_data_dirs_length1;
+diff -ur vinagre-3.22.0/vinagre/vinagre-tube-handler.c vinagre-3.22.0.new/vinagre/vinagre-tube-handler.c
+--- vinagre-3.22.0/vinagre/vinagre-tube-handler.c	2016-09-13 10:34:13.000000000 +0200
++++ vinagre-3.22.0.new/vinagre/vinagre-tube-handler.c	2025-08-12 00:23:33.866660868 +0200
+@@ -112,7 +112,7 @@
+   g_return_if_fail (VINAGRE_IS_TUBE_HANDLER (self));
+ 
+   VinagreTubeHandlerPrivate *priv = VINAGRE_TUBE_HANDLER_GET_PRIVATE (self);
+-  priv->channel = g_object_ref (channel);
++  priv->channel = *g_object_ref (channel);
+ }
+ 
+ static void
+diff -ur vinagre-3.22.0/vinagre/vinagre-utils.c vinagre-3.22.0.new/vinagre/vinagre-utils.c
+--- vinagre-3.22.0/vinagre/vinagre-utils.c	2016-09-20 08:03:46.000000000 +0200
++++ vinagre-3.22.0.new/vinagre/vinagre-utils.c	2025-08-12 00:22:07.006660877 +0200
+@@ -67,7 +67,7 @@
+ static Block2Data* block2_data_ref (Block2Data* _data2_);
+ static void block2_data_unref (void * _userdata_);
+ static void __lambda5_ (Block2Data* _data2_, const gchar* message);
+-static void ___lambda5__gfunc (gconstpointer data, gpointer self);
++static void ___lambda5__gfunc (gpointer data, gpointer self);
+ gboolean vinagre_utils_create_dir_for_file (const gchar* filename, GError** error);
+ GtkBuilder* vinagre_utils_get_builder (void);
+ gchar* vinagre_dirs_get_package_data_file (const gchar* filename);
+@@ -223,7 +223,7 @@
+ }
+ 
+ 
+-static void ___lambda5__gfunc (gconstpointer data, gpointer self) {
++static void ___lambda5__gfunc (gpointer data, gpointer self) {
+ 	__lambda5_ (self, (const gchar*) data);
+ }
+ 
